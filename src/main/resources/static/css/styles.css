@@ -60,3 +60,7 @@ footer { margin-top:20px; background:var(--ink); color:var(--text);
 }
 
 button.danger { background-color: #a01a1a; }
+
+.banner { max-width: 100%; border: 2px solid var(--ink); border-radius: 10px; margin: 10px 0; }
+main { max-width: 720px; }
+main h2 { margin-top: 24px; }
