@@ -1,0 +1,7 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300">
+  <rect width="300" height="300" fill="#abd2fa"/>
+  <circle cx="150" cy="120" r="45" fill="#7692ff"/>
+  <ellipse cx="150" cy="250" rx="85" ry="50" fill="#7692ff"/>
+  <text x="150" y="292" font-family="Trebuchet MS, Arial" font-size="14"
+        fill="#091540" text-anchor="middle">No image yet</text>
+</svg>
