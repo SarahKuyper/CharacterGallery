@@ -1,8 +1,14 @@
 package com.Sarah.characters.entity;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import java.time.LocalDate;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "characters")
@@ -23,6 +29,17 @@ public class OC {
     @NotBlank(message = "Species is required")
     @Column(nullable = false)
     private String species;
+
+    @Column(length = 1000)
+    private String imageUrl;
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 
     private String occupancy;
     private String abilities;

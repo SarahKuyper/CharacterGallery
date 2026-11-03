@@ -4,6 +4,8 @@ A Spring Boot REST API for managing my original characters (OCs)
 from my Assignment 2 static website. Built with Spring Boot, Spring Data JPA,
 and PostgreSQL (hosted on Neon), and deployed to Render.
 
+Requires Java 25 (LTS) to build and run.
+
 ## Entity: `OC`
 
 The `OC` entity maps to the `characters` table in PostgreSQL. It has the

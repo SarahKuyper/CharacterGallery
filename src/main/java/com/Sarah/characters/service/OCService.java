@@ -1,12 +1,13 @@
 package com.Sarah.characters.service;
 
-import com.Sarah.characters.entity.OC;
-import com.Sarah.characters.repository.OCRepository;
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
+import com.Sarah.characters.entity.OC;
+import com.Sarah.characters.repository.OCRepository;
 
 @Service
 public class OCService {
@@ -18,13 +19,23 @@ public class OCService {
     }
 
     public List<OC> getAll(String species, String name) {
-        if (name != null && !name.isBlank()) {
+        boolean hasName = name != null && !name.isBlank();
+        boolean hasSpecies = species != null && !species.isBlank();
+
+        if (hasName && hasSpecies) {
+            return repository.findByNameContainingIgnoreCaseAndSpeciesIgnoreCase(name, species);
+        }
+        if (hasName) {
             return repository.findByNameContainingIgnoreCase(name);
         }
-        if (species != null && !species.isBlank()) {
+        if (hasSpecies) {
             return repository.findBySpeciesIgnoreCase(species);
         }
         return repository.findAll();
+    }
+
+    public List<String> getDistinctSpecies() {
+        return repository.findDistinctSpecies();
     }
 
     public OC getById(long id) {
@@ -45,6 +56,7 @@ public class OCService {
         existing.setOccupancy(updated.getOccupancy());
         existing.setAbilities(updated.getAbilities());
         existing.setInterests(updated.getInterests());
+        existing.setImageUrl(updated.getImageUrl()); // ← must be here
         existing.setActiveDate(updated.getActiveDate());
         return repository.save(existing);
     }

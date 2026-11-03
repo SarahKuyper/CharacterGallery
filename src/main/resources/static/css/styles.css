@@ -58,3 +58,5 @@ footer { margin-top:20px; background:var(--ink); color:var(--text);
     border:2px solid var(--ink); border-radius:10px;
     padding:10px 10px 10px 30px; max-width:720px;
 }
+
+button.danger { background-color: #a01a1a; }
