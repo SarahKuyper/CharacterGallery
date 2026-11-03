@@ -43,7 +43,7 @@
 
     <label for="activeDate">Active since</label>
     <input type="date" id="activeDate" name="activeDate"
-           value="<#if character.activeDate??>${character.activeDate?string('yyyy-MM-dd')}</#if>">
+           value="<#if (character.activeDate)?has_content>${character.activeDate}</#if>">
 
     <label for="description">Backstory *</label>
     <textarea id="description" name="description"
