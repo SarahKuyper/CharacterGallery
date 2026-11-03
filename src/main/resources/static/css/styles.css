@@ -41,3 +41,20 @@ dd { margin:2px 0 0 0; color:var(--text); }
 footer { margin-top:20px; background:var(--ink); color:var(--text);
          text-align:center; padding:10px; border:2px solid var(--ink);
          border-radius:10px; }
+
+/* ---- Forms (add / edit) ---- */
+.stack { display:flex; flex-direction:column; max-width:720px; }
+.stack label { margin-top:10px; font-weight:bold; }
+.stack input, .stack textarea {
+    padding:6px; margin-top:4px;
+    background:var(--panel); color:var(--ink);
+    border:2px solid var(--ink); border-radius:10px;
+    font-family:inherit; font-size:1rem;
+}
+.stack textarea { min-height:120px; resize:vertical; }
+.stack button { margin-top:14px; align-self:flex-start; }
+.errors {
+    background:#ffe0e0; color:var(--ink);
+    border:2px solid var(--ink); border-radius:10px;
+    padding:10px 10px 10px 30px; max-width:720px;
+}
