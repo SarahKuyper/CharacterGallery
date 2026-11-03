@@ -39,7 +39,7 @@ public class PageController {
         model.addAttribute("searchName", name);
         model.addAttribute("searchSpecies", species);
         model.addAttribute("speciesOptions", service.getDistinctSpecies());
-        return "index";
+        return "gallery";
     }
 
     // ---------- Details ----------
