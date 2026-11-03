@@ -83,47 +83,47 @@ Requests for a non-existent ID return **404**. POST or PUT with a missing
   "activeDate": "2023-06-01"
 }
 ```
-### Architecture
+## Architecture
+
 Three layers, all sharing one service:
 
-Database layer — Neon PostgreSQL accessed through Spring Data JPA. The OC
-entity maps to characters; OCRepository provides the queries (by species, by
-name substring, both, and a distinct-species query for the dropdown).
+1. **Database layer** — Neon PostgreSQL accessed through Spring Data JPA. The `OC`
+   entity maps to `characters`; `OCRepository` provides the queries (by species, by
+   name substring, both, and a distinct-species query for the dropdown).
 
-Service layer — OCService holds all business logic: search composition,
-load-then-copy updates (so an edit never creates a duplicate row), and 404
-handling via ResponseStatusException.
+2. **Service layer** — `OCService` holds all business logic: search composition,
+   load-then-copy updates (so an edit never creates a duplicate row), and 404
+   handling via `ResponseStatusException`.
 
-Web layer — two flavors sharing the service:
+3. **Web layer** — two flavors sharing the service:
+   - `PageController` (plain `@Controller`) loads data from the service, adds it
+     to the `Model`, and returns the name of a FreeMarker template under
+     `src/main/resources/templates/`. Page controllers call the service directly,
+     never over HTTP.
+   - `OCController` (`@RestController`) serves JSON at `/api/characters`, unchanged
+     from the Assignment 3 API.
 
-PageController (plain @Controller) loads data from the service, adds it
-to the Model, and returns the name of a FreeMarker template under
-src/main/resources/templates/. Page controllers call the service directly,
-never over HTTP.
-
-OCController (@RestController) serves JSON at /api/characters, unchanged
-from the Assignment 3 API.
-
-layout.ftlh renders the shared <head>, navigation (Home / About / Add a
+`layout.ftlh` renders the shared `<head>`, navigation (Home / About / Add a
 Character), success flash message, and footer for every page — no page duplicates
 that markup.
 
-All mutations use Post/Redirect/Get: forms POST to the controller, which saves
-and then returns redirect:... so refreshing the browser cannot submit the same
+All mutations use **Post/Redirect/Get**: forms POST to the controller, which saves
+and then returns `redirect:...` so refreshing the browser cannot submit the same
 character twice.
 
-The REST exception handler is scoped to com.Sarah.characters.controller, so
+The REST exception handler is scoped to `com.Sarah.characters.controller`, so
 unknown page routes hit the friendly FreeMarker error template while the API still
 returns JSON errors — each flavor handles its own client type.
 
-### Configuration
+---
+
+## Configuration
+
 Database credentials are provided via environment variables and are never committed:
 
-SPRING_DATASOURCE_URL
-
-SPRING_DATASOURCE_USERNAME
-
-SPRING_DATASOURCE_PASSWORD
+- `SPRING_DATASOURCE_URL`
+- `SPRING_DATASOURCE_USERNAME`
+- `SPRING_DATASOURCE_PASSWORD`
 
 The same environment variables are set in the Render dashboard for the deployed
 service.
